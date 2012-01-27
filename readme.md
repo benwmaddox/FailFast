@@ -2,7 +2,7 @@
 
 An experimental unit test framework.  It was made for educating myself on unit test framework development.
 
-It emphasizes on fast iterations, which is where the name originated. The framework will run tests until a failure is detected, then it will stop.
+It emphasizes fast iterations, which is where the name originated. The framework will run tests until a failure is detected.
 
 Other key points:
 
