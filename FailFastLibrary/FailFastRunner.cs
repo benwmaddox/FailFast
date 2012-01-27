@@ -20,12 +20,17 @@ namespace FailFast
             var directory = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
             foreach (var filePath in Directory.GetFiles(directory))
             {
-                if (Path.GetExtension(filePath) == ".dll")
+                if (Path.GetExtension(filePath) == ".dll" && !filePath.Contains("FailFastLibrary.dll"))
                 {
                     assemblies.Add(Assembly.LoadFile(filePath));
                 }
             }
 
+            return assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof(FailFastClass)));
+        }
+
+        public static IEnumerable<Type> FindTestClassesFromAssemblies(IEnumerable<Assembly> assemblies)
+        {
             return assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof(FailFastClass)));
         }
 
