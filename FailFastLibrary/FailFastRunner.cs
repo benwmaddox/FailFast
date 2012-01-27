@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -11,6 +12,30 @@ namespace FailFast
         {
             return Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => type.BaseType == typeof(FailFastClass));
+        }
+
+        public static IEnumerable<Type> FindTestClassesFromLoadedDirectory()
+        {
+            List<Assembly> assemblies = new List<Assembly>();
+            var directory = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+            foreach (var filePath in Directory.GetFiles(directory))
+            {
+                if (Path.GetExtension(filePath) == ".dll")
+                {
+                    assemblies.Add(Assembly.LoadFile(filePath));
+                }
+            }
+
+            return assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof(FailFastClass)));
+        }
+
+        public static IEnumerable<Type> FindTestClassesFromLoadedModules()
+        {
+            //Note: may only work if a reference is used in current assembly.
+            var currentAssembly = Assembly.GetCallingAssembly();
+            var assemblies = currentAssembly.GetReferencedAssemblies();
+            IEnumerable<Assembly> loadAssemblies = assemblies.Select(Assembly.Load);
+            return loadAssemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof (FailFastClass)));
         }
 
         public static string RunTests(IEnumerable<FailFastClass> testClasses)

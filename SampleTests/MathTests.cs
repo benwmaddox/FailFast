@@ -1,4 +1,6 @@
-namespace FailFast
+using FailFast;
+
+namespace SampleTests
 {
     public class MathTests : FailFastClass
     {

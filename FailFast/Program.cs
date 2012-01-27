@@ -11,8 +11,7 @@ namespace FailFast
             var stopWatch = new System.Diagnostics.Stopwatch();
             stopWatch.Start();
             var testClasses = new List<FailFastClass>();
-            var types = FailFastRunner.FindTestClassesFromAssembly();
-
+            var types = FailFastRunner.FindTestClassesFromLoadedDirectory();
             //Testing many classes
             for (int i = 0; i < 401; i++)
             {
@@ -27,6 +26,8 @@ namespace FailFast
             stopWatch.Stop();
             Console.WriteLine(string.Format("Test Run Time: {0} seconds", stopWatch.ElapsedMilliseconds / 1000m));
             Console.WriteLine(runResult);
+
+            Console.ReadLine();
         }
     }
 }

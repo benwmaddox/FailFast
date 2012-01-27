@@ -1,6 +1,6 @@
-using System;
+using FailFast;
 
-namespace FailFast
+namespace SampleTests
 {
     public class FailingTests : FailFastClass
     {
