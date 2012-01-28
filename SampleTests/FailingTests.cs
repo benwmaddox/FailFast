@@ -1,4 +1,5 @@
 using FailFast;
+using Should;
 
 namespace SampleTests
 {
@@ -6,7 +7,7 @@ namespace SampleTests
     {
         public override void Define()
         {
-            Test("Bad Math Test", () => AssertEquals(5, 41 + 1));
+            Test("Bad Math Test", () => (41 + 1).ShouldEqual(5));
             //Test("I can fail", () => { throw new NotImplementedException(); });
             //Test("Failed so bad the test runner doesn't even know.", () => { throw new NotImplementedException(); });
         }

@@ -15,10 +15,10 @@ namespace FailFast
             var testClasses = new List<FailFastClass>();
             var types = FailFastRunner.FindTestClassesFromAssemblies(new List<Assembly>(){Assembly.GetAssembly(typeof(BasicTests))});
             //Testing many classes
-            for (int i = 0; i < 41; i++)
-            {
+            //for (int i = 0; i < 41; i++)
+            //{
                 testClasses.AddRange(types.Select(t => Activator.CreateInstance(t) as FailFastClass));
-            }
+            //}
             stopWatch.Stop();
             Console.WriteLine("Test Class Lookup: {0} seconds", stopWatch.ElapsedMilliseconds / 1000m);
             stopWatch.Reset();

@@ -24,9 +24,9 @@ namespace TestWrapper
             testClasses.AddRange(types.Select(t => Activator.CreateInstance(t) as FailFastClass));
 
             var runResult = FailFastRunner.RunTests(testClasses);
-            if (!runResult.AllTestsPass && runResult.FailedTestException != null)
+            if (!runResult.AllTestsPass)
             {
-                throw new Exception("", runResult.FailedTestException);
+                throw new Exception(runResult.RunMessage, runResult.FailedTestException);
             }
         }
     }
