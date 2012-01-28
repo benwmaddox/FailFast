@@ -7,7 +7,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleTests", "SampleTests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailFastLibrary", "FailFastLibrary\FailFastLibrary.csproj", "{11B9995B-78F4-4818-A89E-E8643BAE5F34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWrapper", "TestWrapper\TestWrapper.csproj", "{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3274F06E-E066-4EEC-A849-917A70074353}"
+	ProjectSection(SolutionItems) = preProject
+		FailFast.vsmdi = FailFast.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FailFast.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -47,6 +59,16 @@ Global
 		{11B9995B-78F4-4818-A89E-E8643BAE5F34}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{11B9995B-78F4-4818-A89E-E8643BAE5F34}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{11B9995B-78F4-4818-A89E-E8643BAE5F34}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FE8B6DDC-4D7B-4A0F-8E8D-8155435039BB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

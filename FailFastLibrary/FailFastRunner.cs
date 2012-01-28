@@ -8,12 +8,10 @@ namespace FailFast
 {
     public class FailFastRunner
     {
-        public static IEnumerable<Type> FindTestClassesFromAssembly()
-        {
-            return Assembly.GetExecutingAssembly().GetTypes()
-                .Where(type => type.BaseType == typeof(FailFastClass));
-        }
-
+        /// <summary>
+        /// Slowest option
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<Type> FindTestClassesFromLoadedDirectory()
         {
             List<Assembly> assemblies = new List<Assembly>();
@@ -29,6 +27,11 @@ namespace FailFast
             return assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof(FailFastClass)));
         }
 
+        /// <summary>
+        /// Fastest option, but requires declaring types in calling code
+        /// </summary>
+        /// <param name="assemblies"></param>
+        /// <returns></returns>
         public static IEnumerable<Type> FindTestClassesFromAssemblies(IEnumerable<Assembly> assemblies)
         {
             return assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof(FailFastClass)));
@@ -43,12 +46,13 @@ namespace FailFast
             return loadAssemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof (FailFastClass)));
         }
 
-        public static string RunTests(IEnumerable<FailFastClass> testClasses)
+        public static RunResult RunTests(IEnumerable<FailFastClass> testClasses)
         {
             bool testFailed = false;
             string failedTestName = "";
             string stackTrace = "";
             string errorMessage = "";
+            Exception exception = null;
             int testsRun = 0;
             foreach (var failFastClass in testClasses)
             {
@@ -72,6 +76,7 @@ namespace FailFast
                         testFailed = true;
                         failedTestName = test.TestName;
                         errorMessage = ex.Message;
+                        exception = ex;
                         stackTrace = ex.StackTrace;
                     }
                 }
@@ -79,18 +84,32 @@ namespace FailFast
             }
 
 
-            string result;
+            string runMessage;
             
             if (testFailed)
             {
-                result = string.Format("{0} tests passed. {3}Test \"{1}\" failed.{3}{4}{3}{3}Trace: {2}",
+                runMessage = string.Format("{0} tests passed. {3}Test \"{1}\" failed.{3}{4}{3}{3}Trace: {2}",
                                        testsRun, failedTestName, stackTrace, Environment.NewLine, errorMessage);
             }
             else
             {
-                result = string.Format("All {0} tests passed.", testsRun);
+                runMessage = string.Format("All {0} tests passed.", testsRun);
             }
-            return result;
+
+            var RunResult = new RunResult()
+                                {
+                                    AllTestsPass = !testFailed,
+                                    FailedTestException = exception,
+                                    RunMessage = runMessage
+                                };
+            return RunResult;
         }
+    }
+
+    public class RunResult
+    {
+        public bool AllTestsPass { get; set; }
+        public Exception FailedTestException { get; set; }
+        public string RunMessage { get; set; }
     }
 }

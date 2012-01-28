@@ -39,7 +39,8 @@ namespace FailFast
         protected void AssertEquals(int expected, int actual)
         {
             if (expected != actual)
-                throw new ArgumentException(string.Format("Failed Assertion. Expected {0}. Got {1}.", expected.ToString(), actual.ToString()));
+                throw new ArgumentException(
+                    string.Format("Failed Assertion. Expected {0}. Got {1}.", expected.ToString(), actual.ToString()));
         }
     }
 }
