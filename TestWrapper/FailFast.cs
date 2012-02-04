@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using FailFast;
@@ -23,11 +22,13 @@ namespace TestWrapper
             var types = FailFastRunner.FindTestClassesFromAssemblies(assemblies);
             testClasses.AddRange(types.Select(t => Activator.CreateInstance(t) as FailFastClass));
 
+
             var runResult = FailFastRunner.RunTests(testClasses);
             if (!runResult.AllTestsPass)
             {
                 throw new Exception(runResult.RunMessage, runResult.FailedTestException);
             }
+            
         }
     }
 }
