@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using FailFast;
 
-namespace FailFast
+namespace FailFastLibrary
 {
     public abstract class FailFastClass
     {

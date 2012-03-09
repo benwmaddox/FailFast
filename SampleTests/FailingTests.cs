@@ -1,4 +1,6 @@
+using System;
 using FailFast;
+using FailFastLibrary;
 using Should;
 
 namespace SampleTests

@@ -1,4 +1,5 @@
 using FailFast;
+using FailFastLibrary;
 
 namespace SampleTests
 {

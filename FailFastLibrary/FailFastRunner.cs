@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using FailFastLibrary;
 
 namespace FailFast
 {
@@ -12,6 +13,21 @@ namespace FailFast
         /// Slowest option
         /// </summary>
         /// <returns></returns>
+        public static IEnumerable<Type> FindTestClassesFromPath(string path)
+        {
+            List<Assembly> assemblies = new List<Assembly>();
+         
+            if (Path.GetExtension(path) == ".dll" && !path.Contains("FailFastLibrary.dll"))
+            {
+                //shadow copy of assembly
+                var newpath = Path.GetTempFileName();
+                File.Copy(path, newpath,true);
+                assemblies.Add(Assembly.LoadFile(newpath));
+            }
+
+            return assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.BaseType == typeof(FailFastClass)));
+        }
+
         public static IEnumerable<Type> FindTestClassesFromLoadedDirectory()
         {
             List<Assembly> assemblies = new List<Assembly>();
@@ -96,13 +112,13 @@ namespace FailFast
                 runMessage = string.Format("All {0} tests passed.", testsRun);
             }
 
-            var RunResult = new RunResult()
+            var runResult = new RunResult()
                                 {
                                     AllTestsPass = !testFailed,
                                     FailedTestException = exception,
                                     RunMessage = runMessage
                                 };
-            return RunResult;
+            return runResult;
         }
     }
 

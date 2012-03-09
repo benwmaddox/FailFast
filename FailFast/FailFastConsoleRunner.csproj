@@ -51,10 +51,6 @@
       <Project>{11B9995B-78F4-4818-A89E-E8643BAE5F34}</Project>
       <Name>FailFastLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SampleTests\SampleTests.csproj">
-      <Project>{BC827F54-E664-4B4A-885F-E43B9AE89250}</Project>
-      <Name>SampleTests</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
